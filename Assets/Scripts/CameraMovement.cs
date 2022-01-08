@@ -17,7 +17,7 @@ public class CameraMovement : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
 
         transform.position = Vector3.Lerp(transform.position, new Vector3(Player.transform.position.x, Player.transform.position.y + aradakiFark.y, Player.transform.position.z + aradakiFark.z), Time.deltaTime * 5f);
