@@ -66,16 +66,19 @@ public class PlayerController : MonoBehaviour
             GameController._oyunAktif = false;
             playerAnimator.SetTrigger("dance");
 
-            StartCoroutine(PlayerWalkCorotine());
+            StartCoroutine(PlayerWalkCorotine(2));
 
         }
         if(other.gameObject.tag == "Badman")
         {
        
             GameController._oyunAktif = false;
-            playerAnimator.SetTrigger("fear");
+          
             FearWalk();
-            StartCoroutine(PlayerWalkCorotine());
+
+            PlayerWalkAnim();
+            GameController._oyunAktif = true;
+
             PlayerWalkFast();
         }
 
@@ -85,13 +88,13 @@ public class PlayerController : MonoBehaviour
     private void FearWalk()
     {
 
-        transform.DOMove(fearPoint.transform.position, 2);
+        transform.DOMove(fearPoint.transform.position, 0.5f);
 
     }
 
-    private IEnumerator PlayerWalkCorotine()
+    private IEnumerator PlayerWalkCorotine(float time)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(time);
         PlayerWalkAnim();
         GameController._oyunAktif = true;
 
