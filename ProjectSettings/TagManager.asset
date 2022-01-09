@@ -8,6 +8,9 @@ TagManager:
   - LevelController
   - UIController
   - Elmas
+  - Platform
+  - Goodman
+  - Badman
   layers:
   - Default
   - TransparentFX
