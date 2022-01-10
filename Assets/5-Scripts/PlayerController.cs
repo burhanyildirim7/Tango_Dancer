@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
-    [SerializeField] private GameObject pointLeft,pointRight;
+    [SerializeField] private GameObject pointLeft,pointRight,emojiPuke,emojiDrool;
 
 
     [SerializeField] private float _speedFast,_speedNormal;
@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
     private int _toplananElmasSayisi;
 
 
+    private void Awake()
+    {
+        emojiPuke.SetActive(false);
+        emojiDrool.SetActive(false);
+    }
 
     void Start()
     {
@@ -70,6 +75,15 @@ public class PlayerController : MonoBehaviour
             BadManMove(pointRight);
         }
 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "BadMan")
+        {
+            emojiPuke.SetActive(true);
+
+        }
     }
 
     private void GoodManDance(GameObject point, GameObject man)
