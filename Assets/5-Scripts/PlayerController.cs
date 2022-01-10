@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
-    [SerializeField] private GameObject fearPoint;
+    [SerializeField] private GameObject pointLeft,pointRight;
 
-    [SerializeField] private float _speedFast;
+
+    [SerializeField] private float _speedFast,_speedNormal;
 
     private int _elmasSayisi;
 
@@ -29,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     private int _toplananElmasSayisi;
 
-    
 
 
     void Start()
@@ -38,12 +38,7 @@ public class PlayerController : MonoBehaviour
 
         _uiController = GameObject.Find("UIController").GetComponent<UIController>();
 
-
-
     }
-
-   
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -55,52 +50,93 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("ElmasSayisi", _elmasSayisi);
             Destroy(other.gameObject);
         }
-        else
+
+
+        if (other.gameObject.tag == "GoodManLeft")
         {
+            GoodManDance(pointLeft,other.gameObject);
+            
+        }else if(other.gameObject.tag == "GoodManRight")
+        {
+            GoodManDance(pointRight, other.gameObject);
+        }
+        if (other.gameObject.tag == "BadManLeft")
+        {
+            BadManMove(pointLeft);
 
         }
-
-        if (other.gameObject.tag == "Goodman")
+        else if (other.gameObject.tag == "BadManRight")
         {
-
-            GameController._oyunAktif = false;
-            playerAnimator.SetTrigger("dance");
-
-            StartCoroutine(PlayerWalkCorotine(2));
-
+            BadManMove(pointRight);
         }
-        if(other.gameObject.tag == "Badman")
-        {
+
+    }
+
+    private void GoodManDance(GameObject point, GameObject man)
+    {
+        //GameController._oyunAktif = false;
+
+        man.transform.parent.parent = transform;
+        playerAnimator.ResetTrigger("walk");
+        
+
+        playerAnimator.SetTrigger("dance");
        
-            GameController._oyunAktif = false;
-          
-            FearWalk();
 
-            PlayerWalkAnim();
-            GameController._oyunAktif = true;
 
-            PlayerWalkFast();
-        }
+        StartCoroutine(PlayerWalk(point, man));
+
 
 
     }
 
-    private void FearWalk()
+    private IEnumerator PlayerWalk(GameObject point, GameObject man)
     {
+        
+        yield return new WaitForSeconds(1);
+        man.transform.parent.GetComponent<GoodManController>().leftCollider.enabled = false;
+        man.transform.parent.GetComponent<GoodManController>().rightcollider.enabled = false;
+        man.transform.parent.GetComponent<GoodManController>().baseCollider.enabled = false;
+        man.transform.parent.parent = null;
+        playerAnimator.ResetTrigger("dance");
+        transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkAnim);
+        
+    }
 
-        transform.DOMove(fearPoint.transform.position, 0.5f);
+    public void PlayerWalkAnim()
+    {
+        playerAnimator.SetTrigger("walk");
+        playerAnimator.SetFloat("run", 1);
+
+        //GameController._oyunAktif = true;
+    }
+
+
+    public void BadManMove(GameObject point)
+    {
+        playerAnimator.ResetTrigger("walk");
+        GameController._oyunAktif = false;
+        transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
+      
 
     }
 
-    private IEnumerator PlayerWalkCorotine(float time)
+    public void PlayerWalkFast()
     {
-        yield return new WaitForSeconds(time);
-        PlayerWalkAnim();
+       
         GameController._oyunAktif = true;
-
+        playerAnimator.SetTrigger("walk");
+        _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedFast;
+        playerAnimator.SetFloat("run", 2);
+        StartCoroutine(PlayerWalkNormal());
     }
 
- 
+    public IEnumerator PlayerWalkNormal()
+    {
+        yield return new WaitForSeconds(2);
+        _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedNormal;
+        playerAnimator.SetFloat("run",1);
+    }
 
     private void WinScreenAc()
     {
@@ -113,8 +149,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    
-
     public void LevelStart()
     {
         _toplananElmasSayisi = 1;
@@ -124,19 +158,5 @@ public class PlayerController : MonoBehaviour
         _player = GameObject.FindWithTag("Player");
         _player.transform.localPosition = new Vector3(0, 1, 0);
     }
-    
-
-
-
-    public void PlayerWalkAnim()
-    {
-        playerAnimator.SetTrigger("walk");
-    }
-
-    public void PlayerWalkFast()
-    {
-        _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedFast;
-    }
-  
- 
+     
 }

@@ -9,8 +9,10 @@ TagManager:
   - UIController
   - Elmas
   - Platform
-  - Goodman
-  - Badman
+  - BadManLeft
+  - BadManRight
+  - GoodManLeft
+  - GoodManRight
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,8 @@ public class GoodManController : MonoBehaviour
 
     [SerializeField] private Animator manAnimator;
 
-   
+    public Collider leftCollider, rightcollider,baseCollider;
+
 
 
 
@@ -24,7 +25,7 @@ public class GoodManController : MonoBehaviour
 
     private IEnumerator ManIdleCorotine()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         manAnimator.SetTrigger("idle");
     }
 }

@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
 
     public static bool _oyunAktif;
+
+
     
     void Start()
     {
