@@ -7,17 +7,24 @@ public class GoodManController : MonoBehaviour
 {
 
     [SerializeField] private Animator manAnimator;
+    [SerializeField] private GameObject emojiKiss, emojiCool;
 
     public Collider leftCollider, rightcollider,baseCollider;
 
 
-
+    private void Awake()
+    {
+        emojiKiss.SetActive(true);
+        emojiCool.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             manAnimator.SetTrigger("dance");
+            emojiKiss.SetActive(false);
+            emojiCool.SetActive(true);
 
             StartCoroutine(ManIdleCorotine());
         }
@@ -27,5 +34,6 @@ public class GoodManController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         manAnimator.SetTrigger("idle");
+        emojiCool.SetActive(false);
     }
 }

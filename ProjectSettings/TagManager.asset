@@ -14,6 +14,7 @@ TagManager:
   - GoodManLeft
   - GoodManRight
   - BadMan
+  - GoodMan
   layers:
   - Default
   - TransparentFX

@@ -75,6 +75,12 @@ public class PlayerController : MonoBehaviour
             BadManMove(pointRight);
         }
 
+        if (other.gameObject.tag == "GoodMan")
+        {
+            emojiDrool.SetActive(true);
+
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -84,6 +90,8 @@ public class PlayerController : MonoBehaviour
             emojiPuke.SetActive(true);
 
         }
+      
+
     }
 
     private void GoodManDance(GameObject point, GameObject man)
@@ -121,7 +129,7 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimator.SetTrigger("walk");
         playerAnimator.SetFloat("run", 1);
-
+        emojiDrool.SetActive(false);
         //GameController._oyunAktif = true;
     }
 
@@ -130,14 +138,15 @@ public class PlayerController : MonoBehaviour
     {
         playerAnimator.ResetTrigger("walk");
         GameController._oyunAktif = false;
-        transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
-      
+        playerAnimator.SetTrigger("defeat");
+        transform.DOMove(point.transform.position, 0.9f).OnComplete(PlayerWalkFast);
+        
 
     }
 
     public void PlayerWalkFast()
     {
-       
+        
         GameController._oyunAktif = true;
         playerAnimator.SetTrigger("walk");
         _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedFast;
@@ -147,6 +156,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator PlayerWalkNormal()
     {
+        emojiPuke.SetActive(false);
         yield return new WaitForSeconds(2);
         _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedNormal;
         playerAnimator.SetFloat("run",1);
