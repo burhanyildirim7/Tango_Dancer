@@ -27,13 +27,17 @@ public class PlayerController : MonoBehaviour
 
     private UIController _uiController;
 
-    private int _toplananElmasSayisi;
+    
+
+    private int _levelSonuElmasSayisi;
 
 
     private void Awake()
     {
         emojiPuke.SetActive(false);
         emojiDrool.SetActive(false);
+
+        FindObjectOfType<Health>().LoseGame += LoseScreenAc;
     }
 
     void Start()
@@ -47,13 +51,13 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
   
-        if (other.tag == "Elmas")
-        {
-            _elmasSayisi += 1;
-            _toplananElmasSayisi += 1;
-            PlayerPrefs.SetInt("ElmasSayisi", _elmasSayisi);
-            Destroy(other.gameObject);
-        }
+        //if (other.tag == "Elmas")
+        //{
+        //    _elmasSayisi += 1;
+        //    _toplananElmasSayisi += 1;
+        //    PlayerPrefs.SetInt("ElmasSayisi", _elmasSayisi);
+        //    Destroy(other.gameObject);
+        //}
 
 
         if (other.gameObject.tag == "GoodManLeft")
@@ -79,7 +83,12 @@ public class PlayerController : MonoBehaviour
         {
             emojiDrool.SetActive(true);
             GetComponentInChildren<Health>().ModifyHealth(10);
-            _uiController._elmasSayisi += 10;
+
+            _elmasSayisi += 10;
+            _levelSonuElmasSayisi += 10;
+            PlayerPrefs.SetInt("ElmasSayisi", _elmasSayisi);
+
+            
         }
 
         if (other.gameObject.tag == "Obstacle")
@@ -188,13 +197,21 @@ public class PlayerController : MonoBehaviour
 
     private void LoseScreenAc()
     {
+
+        _uiController.LevelSonuElmasSayisi(_levelSonuElmasSayisi);
+
+        GameController._oyunAktif = false;
+     
         _uiController.LoseScreenPanelOpen();
+       
+        
     }
 
 
     public void LevelStart()
     {
-        _toplananElmasSayisi = 1;
+        _levelSonuElmasSayisi = 0;
+        //_toplananElmasSayisi = 1;
         _elmasSayisi = PlayerPrefs.GetInt("ElmasSayisi");
         _karakterPaketi.transform.position = new Vector3(0, 0, 0);
         _karakterPaketi.transform.rotation = Quaternion.Euler(0, 0, 0);

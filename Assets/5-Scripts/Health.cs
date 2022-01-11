@@ -9,7 +9,8 @@ public class Health : MonoBehaviour
     private int currentHealth;
 
     public event Action<float> OnHealthPctChanges;
-   
+    public event Action LoseGame;
+
 
     private void OnEnable()
     {
@@ -28,7 +29,7 @@ public class Health : MonoBehaviour
         }
         else
         {
-            //Lose
+            LoseGame();
         }
         
     }

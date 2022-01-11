@@ -27,13 +27,14 @@ public class UIController : MonoBehaviour
     private LevelController _levelController;
 
 
-    private int _levelSonuElmasSayisi;
+    public int _levelSonuElmasSayisi;
 
     private int _oyunBasladi;
 
 
     void Start()
     {
+       
         _tapToStartPanel.SetActive(true);
 
         _levelNumber = PlayerPrefs.GetInt("LevelNumber");
@@ -68,11 +69,13 @@ public class UIController : MonoBehaviour
 
         _elmasSayisi = PlayerPrefs.GetInt("ElmasSayisi");
 
-       
+
         _levelText.text = "LEVEL " + (_levelNumber);
         
         
         _elmasText.text = _elmasSayisi.ToString();
+
+     
     }
 
 
@@ -121,6 +124,8 @@ public class UIController : MonoBehaviour
 
     public void LevelRestartButton()
     {
+        
+
         GameController._oyunAktif = false;
         _winScreenPanel.SetActive(false);
         _loseScreenPanel.SetActive(false);

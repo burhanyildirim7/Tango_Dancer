@@ -39,6 +39,8 @@ public class GoodManController : MonoBehaviour
         leftCollider.enabled = false;
         rightcollider.enabled = false;
         baseCollider.enabled = false;
-
+        Destroy(transform.gameObject, 2);
     }
+
+
 }
