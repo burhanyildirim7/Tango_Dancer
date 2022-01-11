@@ -35,5 +35,10 @@ public class GoodManController : MonoBehaviour
         yield return new WaitForSeconds(1);
         manAnimator.SetTrigger("idle");
         emojiCool.SetActive(false);
+
+        leftCollider.enabled = false;
+        rightcollider.enabled = false;
+        baseCollider.enabled = false;
+
     }
 }

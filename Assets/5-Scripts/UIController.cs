@@ -20,15 +20,17 @@ public class UIController : MonoBehaviour
 
     private int _levelNumber;
 
-    private int _elmasSayisi;
+    public int _elmasSayisi;
 
     private PlayerController _playerController;
 
     private LevelController _levelController;
 
+
     private int _levelSonuElmasSayisi;
 
     private int _oyunBasladi;
+
 
     void Start()
     {
@@ -72,6 +74,8 @@ public class UIController : MonoBehaviour
         
         _elmasText.text = _elmasSayisi.ToString();
     }
+
+
 
     public void TaptoStartPanelClose()
     {

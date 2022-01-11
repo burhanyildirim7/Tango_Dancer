@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject pointLeft,pointRight,emojiPuke,emojiDrool;
 
-
     [SerializeField] private float _speedFast,_speedNormal;
 
     private int _elmasSayisi;
@@ -73,12 +72,24 @@ public class PlayerController : MonoBehaviour
         else if (other.gameObject.tag == "BadManRight")
         {
             BadManMove(pointRight);
+            
         }
 
         if (other.gameObject.tag == "GoodMan")
         {
             emojiDrool.SetActive(true);
+            GetComponentInChildren<Health>().ModifyHealth(10);
+            _uiController._elmasSayisi += 10;
+        }
 
+        if (other.gameObject.tag == "Obstacle")
+        {
+        
+            GetComponentInChildren<Health>().ModifyHealth(-10);
+          
+            playerAnimator.SetTrigger("stumble");
+            StartCoroutine(PlayerStumbleWalk());
+            
         }
 
     }
@@ -88,37 +99,40 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "BadMan")
         {
             emojiPuke.SetActive(true);
-
+            GetComponentInChildren<Health>().ModifyHealth(-10);
         }
-      
 
     }
 
+    //Obstacle//
+    private IEnumerator PlayerStumbleWalk()
+    {
+        yield return new WaitForSeconds(1);
+        playerAnimator.ResetTrigger("stumble");
+        playerAnimator.SetTrigger("walk");
+
+    }
+    //Obstacle//
+
+
+    /// GOODMAN ////
+
     private void GoodManDance(GameObject point, GameObject man)
     {
-        //GameController._oyunAktif = false;
-
+    
         man.transform.parent.parent = transform;
         playerAnimator.ResetTrigger("walk");
-        
 
-        playerAnimator.SetTrigger("dance");
-       
 
+        playerAnimator.SetTrigger("dance");    
 
         StartCoroutine(PlayerWalk(point, man));
-
-
-
     }
 
     private IEnumerator PlayerWalk(GameObject point, GameObject man)
     {
         
         yield return new WaitForSeconds(1);
-        man.transform.parent.GetComponent<GoodManController>().leftCollider.enabled = false;
-        man.transform.parent.GetComponent<GoodManController>().rightcollider.enabled = false;
-        man.transform.parent.GetComponent<GoodManController>().baseCollider.enabled = false;
         man.transform.parent.parent = null;
         playerAnimator.ResetTrigger("dance");
         transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkAnim);
@@ -130,16 +144,19 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetTrigger("walk");
         playerAnimator.SetFloat("run", 1);
         emojiDrool.SetActive(false);
-        //GameController._oyunAktif = true;
-    }
 
+    }
+    /// GOODMAN ////
+
+
+    /// BADMAN///
 
     public void BadManMove(GameObject point)
     {
         playerAnimator.ResetTrigger("walk");
         GameController._oyunAktif = false;
         playerAnimator.SetTrigger("defeat");
-        transform.DOMove(point.transform.position, 0.9f).OnComplete(PlayerWalkFast);
+        transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
         
 
     }
@@ -156,12 +173,14 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator PlayerWalkNormal()
     {
-        emojiPuke.SetActive(false);
-        yield return new WaitForSeconds(2);
+        
+       
+        yield return new WaitForSeconds(1);
+         emojiPuke.SetActive(false);
         _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedNormal;
         playerAnimator.SetFloat("run",1);
     }
-
+    /// BADMAN///
     private void WinScreenAc()
     {
         _uiController.WinScreenPanelOpen();

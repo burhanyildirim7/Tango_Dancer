@@ -15,6 +15,9 @@ TagManager:
   - GoodManRight
   - BadMan
   - GoodMan
+  - ENGEL
+  - DegersizEsya
+  - Obstacle
   layers:
   - Default
   - TransparentFX
