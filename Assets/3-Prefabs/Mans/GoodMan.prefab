@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764564359636508322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: -0.112}
+  m_LocalPosition: {x: -0.037, y: 1.3, z: -0.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,10 +92,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.13
-  m_Height: 1.9
+  m_Radius: 0.09
+  m_Height: 1.8999999
   m_Direction: 1
-  m_Center: {x: -0.11940225, y: -0.39, z: 0}
+  m_Center: {x: -0.060940683, y: -0.39, z: 0}
 --- !u!1 &1764564359752811690
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 1764564359752811685}
   - component: {fileID: 1764564359752811684}
   - component: {fileID: 1764564359752811691}
+  - component: {fileID: 744116886}
   m_Layer: 0
   m_Name: GoodMan
   m_TagString: GoodMan
@@ -161,11 +162,11 @@ CapsuleCollider:
   m_GameObject: {fileID: 1764564359752811690}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.25
+  m_Enabled: 0
+  m_Radius: 0.17631531
   m_Height: 1.9797734
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8739, z: -0.12}
+  m_Center: {x: 0.0016222149, y: 0.8739, z: -0.04}
 --- !u!54 &1764564359752811691
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -182,6 +183,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &744116886
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764564359752811690}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3847002, y: 1.8831043, z: 0.37684917}
+  m_Center: {x: -0.0062025636, y: 0.90968084, z: -0.032266617}
 --- !u!1 &1764564361018510108
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764564361018510108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.278, y: 1.3, z: -0.11199951}
+  m_LocalPosition: {x: 0.293, y: 1.3, z: -0.16000009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -241,10 +255,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.13
-  m_Height: 1.9
+  m_Radius: 0.09
+  m_Height: 1.8999999
   m_Direction: 1
-  m_Center: {x: -0.11940225, y: -0.39, z: 0}
+  m_Center: {x: -0.18554324, y: -0.39, z: 0}
 --- !u!1001 &1764564360085408077
 PrefabInstance:
   m_ObjectHideFlags: 0

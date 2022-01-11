@@ -86,7 +86,8 @@ public class UIController : MonoBehaviour
         _tapToStartPanel.SetActive(false);
         _gameScreenPanel.SetActive(true);
 
-        _playerController.PlayerWalkAnim();
+        _playerController.TabToStart();
+
     }
 
     public void WinScreenPanelOpen()
@@ -101,6 +102,7 @@ public class UIController : MonoBehaviour
         _gameScreenPanel.SetActive(false);
         _loseScreenPanel.SetActive(true);
         _loseElmasText.text = _levelSonuElmasSayisi.ToString();
+      
     }
 
     public void NextLevelButton()
@@ -124,7 +126,7 @@ public class UIController : MonoBehaviour
 
     public void LevelRestartButton()
     {
-        
+
 
         GameController._oyunAktif = false;
         _winScreenPanel.SetActive(false);
@@ -136,6 +138,7 @@ public class UIController : MonoBehaviour
         _levelController.LevelRestart();
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         _playerController.LevelStart();
+
     }
 
 }

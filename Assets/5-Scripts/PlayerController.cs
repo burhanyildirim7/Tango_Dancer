@@ -34,18 +34,21 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+       
         emojiPuke.SetActive(false);
         emojiDrool.SetActive(false);
 
         FindObjectOfType<Health>().LoseGame += LoseScreenAc;
+        
     }
 
     void Start()
     {
-        LevelStart();
+        //LevelStart();
 
         _uiController = GameObject.Find("UIController").GetComponent<UIController>();
 
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -197,26 +200,49 @@ public class PlayerController : MonoBehaviour
 
     private void LoseScreenAc()
     {
+        gameObject.GetComponentInChildren<Animator>().Rebind();
 
         _uiController.LevelSonuElmasSayisi(_levelSonuElmasSayisi);
-
-        GameController._oyunAktif = false;
-     
+    
+      
         _uiController.LoseScreenPanelOpen();
-       
-        
+
+        playerAnimator.ResetTrigger("walk");
+        playerAnimator.ResetTrigger("defeat");
+        playerAnimator.ResetTrigger("stumble");
+        playerAnimator.ResetTrigger("dance");
+        playerAnimator.SetTrigger("idle");
+
+        StartCoroutine(StopGame());
     }
 
+    private IEnumerator StopGame()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GameController._oyunAktif = false;
+    }
 
     public void LevelStart()
     {
+      
+        
         _levelSonuElmasSayisi = 0;
-        //_toplananElmasSayisi = 1;
+    
         _elmasSayisi = PlayerPrefs.GetInt("ElmasSayisi");
         _karakterPaketi.transform.position = new Vector3(0, 0, 0);
         _karakterPaketi.transform.rotation = Quaternion.Euler(0, 0, 0);
         _player = GameObject.FindWithTag("Player");
         _player.transform.localPosition = new Vector3(0, 1, 0);
+   
+       
     }
-     
+
+    public void TabToStart()
+    {
+        playerAnimator.ResetTrigger("idle");
+        playerAnimator.SetTrigger("walk");
+      
+    }
+
+
 }

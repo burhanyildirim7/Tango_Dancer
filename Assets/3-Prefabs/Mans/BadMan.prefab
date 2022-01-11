@@ -129,6 +129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emojiKiss: {fileID: 93198825381299071}
   emojiCry: {fileID: 1186577879297977292}
+  leftCollider: {fileID: 93198825903880414}
+  rightcollider: {fileID: 93198825376951507}
+  baseCollider: {fileID: 3543861739746206627}
 --- !u!54 &1549636707
 Rigidbody:
   m_ObjectHideFlags: 0
