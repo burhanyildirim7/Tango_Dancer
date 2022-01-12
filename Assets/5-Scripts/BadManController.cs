@@ -7,7 +7,7 @@ public class BadManController : MonoBehaviour
 {
     [SerializeField] private GameObject emojiKiss,emojiCry;
 
-    public Collider leftCollider, rightcollider, baseCollider;
+    public Collider leftCollider, rightcollider;
     private void Awake()
     {
         emojiKiss.SetActive(true);
@@ -20,26 +20,23 @@ public class BadManController : MonoBehaviour
         {
             emojiKiss.SetActive(false);
             emojiCry.SetActive(true);
+            //StartCoroutine(BadManCorotine());
         }
-        //StartCoroutine(BadManCorotine());
+        
     }
+
+ 
 
     //private IEnumerator BadManCorotine()
     //{
     //    yield return new WaitForSeconds(0.1f);
     //    leftCollider.enabled = false;
     //    rightcollider.enabled = false;
-    //    baseCollider.enabled = false;
+     
 
 
     //}
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if(other.gameObject.tag == "Player")
-    //    {
-    //        emojiKiss.SetActive(false);
-    //        emojiCry.SetActive(true);
-    //    }
-    //}
+ 
+
 }

@@ -26,7 +26,7 @@ public class LevelController : MonoBehaviour
         {
 
         }
-        //PlayerPrefs.SetInt("LevelNumarası", 0);
+        PlayerPrefs.SetInt("LevelNumarası", 0);
 
         _levelNumarasi = PlayerPrefs.GetInt("LevelNumarasi");
         _levelNumber = PlayerPrefs.GetInt("LevelNumber");

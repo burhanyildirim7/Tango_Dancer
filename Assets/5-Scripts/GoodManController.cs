@@ -8,8 +8,9 @@ public class GoodManController : MonoBehaviour
 
     [SerializeField] private Animator manAnimator;
     [SerializeField] private GameObject emojiKiss, emojiCool;
+    [SerializeField] private GameObject baseGameObject;
 
-    public Collider leftCollider, rightcollider,baseCollider;
+    public Collider leftCollider, rightcollider;
 
 
     private void Awake()
@@ -32,14 +33,14 @@ public class GoodManController : MonoBehaviour
 
     private IEnumerator ManIdleCorotine()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         manAnimator.SetTrigger("idle");
         emojiCool.SetActive(false);
 
         leftCollider.enabled = false;
         rightcollider.enabled = false;
-        baseCollider.enabled = false;
-        Destroy(transform.gameObject, 2);
+
+        Destroy(baseGameObject, 2);
     }
 
 
