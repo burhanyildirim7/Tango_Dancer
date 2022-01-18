@@ -18,6 +18,9 @@ TagManager:
   - ENGEL
   - DegersizEsya
   - Obstacle
+  - GoodManPoint
+  - BadManPoint
+  - GoodManEmoji
   layers:
   - Default
   - TransparentFX

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5977844301444723146}
   - component: {fileID: 5977844301444723147}
   - component: {fileID: 5977844301444723145}
+  - component: {fileID: 1643223556}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -100,12 +101,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977844301444723136}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.18
-  m_Height: 1.8805413
+  m_Height: 1.6703807
   m_Direction: 1
-  m_Center: {x: 0, y: 0.78689027, z: 0}
+  m_Center: {x: 0, y: 0.8919706, z: 0}
 --- !u!114 &5977844301444723146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swerveSpeed: 0.5
   _getPoint: {fileID: 0}
-  _radius: 4
+  _radius: 3.5
 --- !u!114 &5977844301444723145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +149,7 @@ MonoBehaviour:
   _iyiToplanabilirDeger: 0
   "_k\xF6t\xFCToplanabilirDeger": 0
   _karakterPaketi: {fileID: 0}
+  _finishLevel: {fileID: 4193258202526137091, guid: 9e41c1ad9e846804997192b8a9f02590, type: 3}
   playerAnimator: {fileID: 6082596924579769118}
   pointLeft: {fileID: 5977844301461403549}
   pointRight: {fileID: 5977844301873803779}
@@ -155,6 +157,22 @@ MonoBehaviour:
   emojiDrool: {fileID: 5977844301632330565}
   _speedFast: 10
   _speedNormal: 5
+--- !u!54 &1643223556
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5977844301444723136}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5977844301461403549
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
 --- !u!114 &6948644117836370452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2144209276064177908, guid: c97b95e618c854e169d67373580402b9, type: 3}
       propertyPath: m_Name
-      value: Progress Bar Red
+      value: 'Progress Bar '
       objectReference: {fileID: 0}
     - target: {fileID: 6783096484778072158, guid: c97b95e618c854e169d67373580402b9, type: 3}
       propertyPath: m_Value
@@ -542,7 +561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 476299732787322631, guid: 0b0e81202a6bfb943864c746f27e2596, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.058
       objectReference: {fileID: 0}
     - target: {fileID: 476299732787322631, guid: 0b0e81202a6bfb943864c746f27e2596, type: 3}
       propertyPath: m_LocalPosition.z

@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
             OnHealthPctChanges(currentHealthPct);
          
         }
-        else
+        else if(amount<0)
         {
             LoseGame();
         }

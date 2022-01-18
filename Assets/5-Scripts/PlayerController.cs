@@ -19,9 +19,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
-    [SerializeField] private GameObject pointLeft,pointRight,emojiPuke,emojiDrool;
+    [SerializeField] private GameObject pointLeft,pointRight,emojiPuke,emojiDrool, confetti;
+
 
     [SerializeField] private float _speedFast,_speedNormal;
+
 
     private int _elmasSayisi;
 
@@ -29,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private UIController _uiController;
 
-    private bool isBadPoint, isGoodPoint;
+    
 
     private int _levelSonuElmasSayisi;
 
@@ -40,11 +42,11 @@ public class PlayerController : MonoBehaviour
         emojiPuke.SetActive(false);
         emojiDrool.SetActive(false);
 
-        FindObjectOfType<Health>().LoseGame += LoseScreenAc;
+        GetComponentInChildren<Health>().LoseGame += LoseScreenAc;
 
         _elmasSayisi = PlayerPrefs.GetInt("ElmasSayisi");
 
-        
+       
     }
 
     private void Update()
@@ -63,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-  
+
         //if (other.tag == "Elmas")
         //{
         //    _elmasSayisi += 1;
@@ -72,47 +74,50 @@ public class PlayerController : MonoBehaviour
         //    Destroy(other.gameObject);
         //}
 
+        //if (other.gameObject.tag == "GoodManLeft")
+        //{
 
-        if (other.gameObject.tag == "GoodManLeft"&& isGoodPoint==false)
-        {
-            isGoodPoint = true;
-            GoodManDance(pointLeft,other.gameObject);
-            GoodManPoint();
-            
-        }
-        else if(other.gameObject.tag == "GoodManRight" && isGoodPoint==false)
-        {
-            isGoodPoint = true;
-            GoodManDance(pointRight, other.gameObject);
-            GoodManPoint();
-            
-        }
-        if (other.gameObject.tag == "BadManLeft" && isBadPoint==false)
-        {
-            isBadPoint = true;
+           
+        //    StartGoodmanActionLeft(other.gameObject);
+        //}
+
+        //if (other.gameObject.tag == "GoodManLeft")
+        //{
+
+        //    GoodManDance(pointLeft, other.gameObject);
+
+        //}
+        //else if(other.gameObject.tag == "GoodManRight")
+        //{
+
+        //    GoodManDance(pointRight, other.gameObject);
+
+        //}
+        if (other.gameObject.tag == "BadManLeft")
+        {     
             BadManMove(pointLeft);
+               
+        }
+        else if (other.gameObject.tag == "BadManRight" )
+        {
+       
+            BadManMove(pointRight);
+         
+        }
+
+        if(other.gameObject.tag == "GoodManPoint")
+        {
+            GoodManPoint();
+      
+        }
+
+        if (other.gameObject.tag == "BadManPoint")
+        {
             BadManPoint();
            
         }
-        else if (other.gameObject.tag == "BadManRight" && isBadPoint==false)
-        {
-            isBadPoint = true;
-            BadManMove(pointRight);
-            BadManPoint();
-          
-        }
 
-        //if (other.gameObject.tag == "GoodMan")
-        //{
-        //    emojiDrool.SetActive(true);
-        //    GetComponentInChildren<Health>().ModifyHealth(10);
-
-        //    _elmasSayisi += 10;
-        //    _levelSonuElmasSayisi += 10;
-        //    PlayerPrefs.SetInt("ElmasSayisi", _elmasSayisi);
-
-            
-        //}
+     
 
         if (other.gameObject.tag == "Obstacle")
         {
@@ -124,11 +129,7 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        //if (other.gameObject.tag == "BadMan")
-        //{
-        //    emojiPuke.SetActive(true);
-        //    GetComponentInChildren<Health>().ModifyHealth(-10);
-        //}
+      
 
         if (other.gameObject.tag == "Finish")
         {
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetTrigger("idle");
             GameController._oyunAktif = false;
             int gidilecekFinishX = (GetComponentInChildren<Health>().currentHealth/10);
-            print(gidilecekFinishX);
+            //print(gidilecekFinishX);
             if(gidilecekFinishX!=0)
                 _levelSonuElmasSayisi = _levelSonuElmasSayisi * gidilecekFinishX;
             
@@ -145,9 +146,13 @@ public class PlayerController : MonoBehaviour
 
             if (gidilecekFinishX > 10)
                 gidilecekFinishX = 10;
+           
             transform.DOMoveZ(_finishLevel._xFinish[gidilecekFinishX].transform.position.z, gidilecekFinishX);
+            if (gidilecekFinishX == 0)
+                gidilecekFinishX = 1;
             transform.DORotate(new Vector3(0,360*gidilecekFinishX,0), gidilecekFinishX,RotateMode.FastBeyond360).OnComplete(PlayerWinAnim);
 
+            confetti.GetComponent<ParticleSystem>().Play();
 
             int sayac = (GetComponentInChildren<Health>().currentHealth / 10);
             
@@ -163,7 +168,7 @@ public class PlayerController : MonoBehaviour
         
         emojiPuke.SetActive(true);
         GetComponentInChildren<Health>().ModifyHealth(-10);
-        isBadPoint = false;
+      
     }
 
     private void GoodManPoint()
@@ -171,7 +176,7 @@ public class PlayerController : MonoBehaviour
         
         emojiDrool.SetActive(true);
         GetComponentInChildren<Health>().ModifyHealth(10);
-        isGoodPoint = false;
+    
         _elmasSayisi += 10;
         _levelSonuElmasSayisi += 10;
         PlayerPrefs.SetInt("ElmasSayisi", _elmasSayisi);
@@ -193,11 +198,17 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerWinAnim()
     {
+        
         transform.DORotate(new Vector3(0, 180, 0), 0.5f);
         playerAnimator.ResetTrigger("idle");
         playerAnimator.SetTrigger("windance");
+        confetti.GetComponent<ParticleSystem>().Stop();
         StartCoroutine(WinScreenAc());
+
     }
+
+
+
 
 
     //OBSTACLE//
@@ -213,14 +224,28 @@ public class PlayerController : MonoBehaviour
 
     /// GOODMAN ////
 
-    private void GoodManDance(GameObject point, GameObject man)
+    public  void StartGoodmanActionLeft(GameObject man, string danceInfo)
+        {
+             
+            GoodManDance(pointLeft, man, danceInfo);
+
+        }
+
+    public void StartGoodmanActionRight(GameObject man, string danceInfo)
+    {
+
+        GoodManDance(pointRight, man, danceInfo);
+
+    }
+
+    private void GoodManDance(GameObject point, GameObject man, string danceInfo)
     {
     
         man.transform.parent.parent = transform;
         playerAnimator.ResetTrigger("walk");
 
-
-        playerAnimator.SetTrigger("dance");    
+       
+        playerAnimator.SetTrigger(danceInfo);    
 
         StartCoroutine(PlayerWalk(point, man));
     }
@@ -231,6 +256,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
         man.transform.parent.parent = null;
         playerAnimator.ResetTrigger("dance");
+        playerAnimator.ResetTrigger("dance2");
+        playerAnimator.ResetTrigger("dance3");
         transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkAnim);
         
     }
@@ -259,8 +286,9 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerWalkFast()
     {
-        
+
         //GameController._oyunAktif = true;
+        playerAnimator.ResetTrigger("defeat");
         playerAnimator.SetTrigger("walk");
         _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedFast;
         playerAnimator.SetFloat("run", 2);
@@ -281,7 +309,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _uiController.WinScreenPanelOpen();
-        playerAnimator.ResetTrigger("windance");
+        //playerAnimator.ResetTrigger("windance");
         playerAnimator.SetTrigger("idle");
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
