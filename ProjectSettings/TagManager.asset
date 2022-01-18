@@ -21,6 +21,7 @@ TagManager:
   - GoodManPoint
   - BadManPoint
   - GoodManEmoji
+  - SetPlayerCenter
   layers:
   - Default
   - TransparentFX

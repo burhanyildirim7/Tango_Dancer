@@ -129,13 +129,20 @@ public class PlayerController : MonoBehaviour
             
         }
 
-      
+        if (other.gameObject.tag == "SetPlayerCenter")
+        {
+            
+            transform.DOMoveX(0, 0.5f);
+        }
 
         if (other.gameObject.tag == "Finish")
         {
+            GameController._oyunAktif = false;
             playerAnimator.ResetTrigger("walk");
             playerAnimator.SetTrigger("idle");
-            GameController._oyunAktif = false;
+         
+            
+
             int gidilecekFinishX = (GetComponentInChildren<Health>().currentHealth/10);
             //print(gidilecekFinishX);
             if(gidilecekFinishX!=0)
