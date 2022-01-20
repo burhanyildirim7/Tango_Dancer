@@ -19,10 +19,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
-    [SerializeField] private GameObject pointLeft,pointRight,emojiPuke,emojiDrool, confetti;
+    [SerializeField] private GameObject pointLeft, pointRight, emojiPuke, emojiDrool, confetti;
 
 
-    [SerializeField] private float _speedFast,_speedNormal;
+    [SerializeField] private float _speedFast, _speedNormal;
 
 
     private int _elmasSayisi;
@@ -31,14 +31,14 @@ public class PlayerController : MonoBehaviour
 
     private UIController _uiController;
 
-    
+
 
     private int _levelSonuElmasSayisi;
 
 
     private void Awake()
     {
-       
+
         emojiPuke.SetActive(false);
         emojiDrool.SetActive(false);
 
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
         _elmasSayisi = PlayerPrefs.GetInt("ElmasSayisi");
 
-       
+
     }
 
     private void Update()
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         //LevelStart();
 
         _uiController = GameObject.Find("UIController").GetComponent<UIController>();
-       
+
 
     }
 
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         //if (other.gameObject.tag == "GoodManLeft")
         //{
 
-           
+
         //    StartGoodmanActionLeft(other.gameObject);
         //}
 
@@ -94,44 +94,44 @@ public class PlayerController : MonoBehaviour
 
         //}
         if (other.gameObject.tag == "BadManLeft")
-        {     
-            BadManMove(pointLeft);
-               
-        }
-        else if (other.gameObject.tag == "BadManRight" )
         {
-       
+            BadManMove(pointLeft);
+
+        }
+        else if (other.gameObject.tag == "BadManRight")
+        {
+
             BadManMove(pointRight);
-         
+
         }
 
-        if(other.gameObject.tag == "GoodManPoint")
+        if (other.gameObject.tag == "GoodManPoint")
         {
             GoodManPoint();
-      
+
         }
 
         if (other.gameObject.tag == "BadManPoint")
         {
             BadManPoint();
-           
+
         }
 
-     
+
 
         if (other.gameObject.tag == "Obstacle")
         {
-        
+
             GetComponentInChildren<Health>().ModifyHealth(-10);
-          
+
             playerAnimator.SetTrigger("stumble");
             StartCoroutine(PlayerStumbleWalk());
-            
+
         }
 
         if (other.gameObject.tag == "SetPlayerCenter")
         {
-            
+
             transform.DOMoveX(0, 0.5f);
         }
 
@@ -140,31 +140,31 @@ public class PlayerController : MonoBehaviour
             GameController._oyunAktif = false;
             playerAnimator.ResetTrigger("walk");
             playerAnimator.SetTrigger("idle");
-         
-            
 
-            int gidilecekFinishX = (GetComponentInChildren<Health>().currentHealth/10);
+
+
+            int gidilecekFinishX = (GetComponentInChildren<Health>().currentHealth / 10);
             //print(gidilecekFinishX);
-            if(gidilecekFinishX!=0)
+            if (gidilecekFinishX != 0)
                 _levelSonuElmasSayisi = _levelSonuElmasSayisi * gidilecekFinishX;
-            
+
 
             _uiController.LevelSonuElmasSayisi(_levelSonuElmasSayisi);
 
             if (gidilecekFinishX > 10)
                 gidilecekFinishX = 10;
-           
+
             transform.DOMoveZ(_finishLevel._xFinish[gidilecekFinishX].transform.position.z, gidilecekFinishX);
             if (gidilecekFinishX == 0)
                 gidilecekFinishX = 1;
-            transform.DORotate(new Vector3(0,360*gidilecekFinishX,0), gidilecekFinishX,RotateMode.FastBeyond360).OnComplete(PlayerWinAnim);
+            transform.DORotate(new Vector3(0, 360 * gidilecekFinishX, 0), gidilecekFinishX, RotateMode.FastBeyond360).OnComplete(PlayerWinAnim);
 
             confetti.GetComponent<ParticleSystem>().Play();
 
             int sayac = (GetComponentInChildren<Health>().currentHealth / 10);
-            
-        
-                StartCoroutine(PlayerHealtBarAzaltma(sayac));
+
+
+            StartCoroutine(PlayerHealtBarAzaltma(sayac));
 
 
         }
@@ -172,22 +172,22 @@ public class PlayerController : MonoBehaviour
 
     private void BadManPoint()
     {
-        
+
         emojiPuke.SetActive(true);
         GetComponentInChildren<Health>().ModifyHealth(-10);
-      
+
     }
 
     private void GoodManPoint()
     {
-        
+
         emojiDrool.SetActive(true);
         GetComponentInChildren<Health>().ModifyHealth(10);
-    
+
         _elmasSayisi += 10;
         _levelSonuElmasSayisi += 10;
         PlayerPrefs.SetInt("ElmasSayisi", _elmasSayisi);
-        
+
     }
 
     private IEnumerator PlayerHealtBarAzaltma(int sayac)
@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerWinAnim()
     {
-        
+
         transform.DORotate(new Vector3(0, 180, 0), 0.5f);
         playerAnimator.ResetTrigger("idle");
         playerAnimator.SetTrigger("windance");
@@ -231,12 +231,12 @@ public class PlayerController : MonoBehaviour
 
     /// GOODMAN ////
 
-    public  void StartGoodmanActionLeft(GameObject man, string danceInfo)
-        {
-             
-            GoodManDance(pointLeft, man, danceInfo);
+    public void StartGoodmanActionLeft(GameObject man, string danceInfo)
+    {
 
-        }
+        GoodManDance(pointLeft, man, danceInfo);
+
+    }
 
     public void StartGoodmanActionRight(GameObject man, string danceInfo)
     {
@@ -247,26 +247,26 @@ public class PlayerController : MonoBehaviour
 
     private void GoodManDance(GameObject point, GameObject man, string danceInfo)
     {
-    
+
         man.transform.parent.parent = transform;
         playerAnimator.ResetTrigger("walk");
 
-       
-        playerAnimator.SetTrigger(danceInfo);    
+
+        playerAnimator.SetTrigger(danceInfo);
 
         StartCoroutine(PlayerWalk(point, man));
     }
 
     private IEnumerator PlayerWalk(GameObject point, GameObject man)
     {
-        
+
         yield return new WaitForSeconds(1);
         man.transform.parent.parent = null;
         playerAnimator.ResetTrigger("dance");
         playerAnimator.ResetTrigger("dance2");
         playerAnimator.ResetTrigger("dance3");
         transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkAnim);
-        
+
     }
 
     public void PlayerWalkAnim()
@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
         //GameController._oyunAktif = false;
         playerAnimator.SetTrigger("defeat");
         transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
-        
+
 
     }
 
@@ -304,12 +304,12 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator PlayerWalkNormal()
     {
-        
-       
+
+
         yield return new WaitForSeconds(1);
-         emojiPuke.SetActive(false);
+        emojiPuke.SetActive(false);
         _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedNormal;
-        playerAnimator.SetFloat("run",1);
+        playerAnimator.SetFloat("run", 1);
     }
     /// BADMAN///
     private IEnumerator WinScreenAc()
@@ -353,23 +353,23 @@ public class PlayerController : MonoBehaviour
     //LOSE
     public void LevelStart()
     {
-        
+
         _levelSonuElmasSayisi = 0;
-    
+
         _elmasSayisi = PlayerPrefs.GetInt("ElmasSayisi");
         _karakterPaketi.transform.position = new Vector3(0, 0, 0);
         _karakterPaketi.transform.rotation = Quaternion.Euler(0, 0, 0);
         _player = GameObject.FindWithTag("Player");
-        _player.transform.localPosition = new Vector3(0, 1, 0);
-        
-      
+        _player.transform.localPosition = new Vector3(0, 0.55f, 0);
+
+
     }
 
     public void TabToStart()
     {
         playerAnimator.ResetTrigger("idle");
         playerAnimator.SetTrigger("walk");
-      
+
     }
 
 
