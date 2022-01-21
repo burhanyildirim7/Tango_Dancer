@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _finishLevel = GameObject.FindGameObjectWithTag("Finish").GetComponent<FinishLevel>();
+        _finishLevel = GameObject.Find("Finish").GetComponent<FinishLevel>();
     }
 
     void Start()
@@ -144,15 +144,15 @@ public class PlayerController : MonoBehaviour
 
 
             int gidilecekFinishX = (GetComponentInChildren<Health>().currentHealth / 10);
-            //print(gidilecekFinishX);
+            print(gidilecekFinishX);
             if (gidilecekFinishX != 0)
                 _levelSonuElmasSayisi = _levelSonuElmasSayisi * gidilecekFinishX;
 
 
             _uiController.LevelSonuElmasSayisi(_levelSonuElmasSayisi);
 
-            if (gidilecekFinishX > 10)
-                gidilecekFinishX = 10;
+            if (gidilecekFinishX > 9)
+                gidilecekFinishX = 9;
 
             transform.DOMoveZ(_finishLevel._xFinish[gidilecekFinishX].transform.position.z, gidilecekFinishX);
             if (gidilecekFinishX == 0)
