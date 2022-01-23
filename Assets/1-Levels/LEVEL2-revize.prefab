@@ -5755,6 +5755,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoodMan (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
 --- !u!4 &493863764514218340 stripped
@@ -6038,6 +6054,22 @@ PrefabInstance:
     - target: {fileID: 1764564359752811690, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
       propertyPath: m_Name
       value: GoodMan (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
@@ -7133,6 +7165,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoodMan (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
 --- !u!4 &493863764129535583 stripped
@@ -7452,6 +7500,22 @@ PrefabInstance:
     - target: {fileID: 1764564359752811690, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
       propertyPath: m_Name
       value: GoodMan
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
@@ -7827,6 +7891,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoodMan (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
 --- !u!4 &493863765714646509 stripped
@@ -8012,6 +8092,22 @@ PrefabInstance:
     - target: {fileID: 1764564359752811690, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
       propertyPath: m_Name
       value: GoodMan (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
@@ -8662,6 +8758,22 @@ PrefabInstance:
     - target: {fileID: 1764564359752811690, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
       propertyPath: m_Name
       value: GoodMan (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877409107870240731, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7740359580351730566, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
+      propertyPath: _danceAnim3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87bb50ea47f58f4889b26221d55f96f, type: 3}
