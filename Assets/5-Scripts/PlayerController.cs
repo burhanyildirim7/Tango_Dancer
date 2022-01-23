@@ -69,13 +69,14 @@ public class PlayerController : MonoBehaviour
       
         if (other.gameObject.tag == "BadManLeft")
         {
-            BadManMove(pointLeft);
+            if (GetComponentInChildren<Health>().currentHealth >= 0)
+                BadManMove(pointLeft);
 
         }
         else if (other.gameObject.tag == "BadManRight")
         {
-
-            BadManMove(pointRight);
+            if (GetComponentInChildren<Health>().currentHealth >= 0)
+                BadManMove(pointRight);
 
         }
 
@@ -96,10 +97,16 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Obstacle")
         {
 
-            GetComponentInChildren<Health>().ModifyHealth(-10);
+            
+            if (GetComponentInChildren<Health>().currentHealth >= 0)
+            {
+                GetComponentInChildren<Health>().ModifyHealth(-10);
+                playerAnimator.SetTrigger("stumble");
 
-            playerAnimator.SetTrigger("stumble");
-            StartCoroutine(PlayerStumbleWalk());
+                PlayerStumbleWalk();
+                
+            }
+            
 
         }
 
@@ -194,12 +201,12 @@ public class PlayerController : MonoBehaviour
 
 
     //OBSTACLE//
-    private IEnumerator PlayerStumbleWalk()
+    private void PlayerStumbleWalk()
     {
-        yield return new WaitForSeconds(1);
-        playerAnimator.ResetTrigger("stumble");
-        if(GetComponentInChildren<Health>().currentHealth>0)
-            playerAnimator.SetTrigger("walk");
+     
+            //playerAnimator.ResetTrigger("stumble");
+            if (GetComponentInChildren<Health>().currentHealth >= 0)
+                playerAnimator.SetTrigger("walk");
 
     }
     //OBSTACLE//
@@ -270,13 +277,12 @@ public class PlayerController : MonoBehaviour
 
     public void BadManMove(GameObject point)
     {
-        if (GetComponentInChildren<Health>().currentHealth > 0)
-        {
+        
             playerAnimator.ResetTrigger("walk");
             //GameController._oyunAktif = false;
             playerAnimator.SetTrigger("defeat");
             transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
-        }
+        
             
 
 
@@ -284,13 +290,15 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerWalkFast()
     {
-
-        //GameController._oyunAktif = true;
-        playerAnimator.ResetTrigger("defeat");
-        playerAnimator.SetTrigger("walk");
-        _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedFast;
-        playerAnimator.SetFloat("run", 2);
-        StartCoroutine(PlayerWalkNormal());
+        
+        
+            //GameController._oyunAktif = true;
+            playerAnimator.ResetTrigger("defeat");
+            playerAnimator.SetTrigger("walk");
+            _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedFast;
+            playerAnimator.SetFloat("run", 2);
+            StartCoroutine(PlayerWalkNormal());
+        
     }
 
     public IEnumerator PlayerWalkNormal()
@@ -318,9 +326,9 @@ public class PlayerController : MonoBehaviour
     {
         //StartCoroutine(StartDeath());
         ResetAllanim();
-        DOTween.KillAll();
-        
-        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        //DOTween.KillAll();
+
+        //gameObject.GetComponent<CapsuleCollider>().enabled = false;
         GameController._oyunAktif = false;
         //gameObject.GetComponentInChildren<Animator>().Rebind();
 
