@@ -71,13 +71,13 @@ public class PlayerController : MonoBehaviour
         {
             if (GetComponentInChildren<Health>().currentHealth >= 0)
                 BadManMove(pointLeft);
-
+            
         }
         else if (other.gameObject.tag == "BadManRight")
         {
             if (GetComponentInChildren<Health>().currentHealth >= 0)
                 BadManMove(pointRight);
-
+            
         }
 
         if (other.gameObject.tag == "GoodManPoint")
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
                 GetComponentInChildren<Health>().ModifyHealth(-10);
                 playerAnimator.SetTrigger("stumble");
 
-                PlayerStumbleWalk();
+               StartCoroutine( PlayerStumbleWalk());
                 
             }
             
@@ -201,12 +201,17 @@ public class PlayerController : MonoBehaviour
 
 
     //OBSTACLE//
-    private void PlayerStumbleWalk()
+    private IEnumerator PlayerStumbleWalk()
     {
-     
-            //playerAnimator.ResetTrigger("stumble");
+        yield return new WaitForSeconds(0.5f);
+            
             if (GetComponentInChildren<Health>().currentHealth >= 0)
-                playerAnimator.SetTrigger("walk");
+        {
+            playerAnimator.ResetTrigger("stumble");
+            playerAnimator.SetTrigger("walk");
+        }
+      
+            
 
     }
     //OBSTACLE//
@@ -324,7 +329,13 @@ public class PlayerController : MonoBehaviour
 
     private void DeathPlayer()
     {
-        //StartCoroutine(StartDeath());
+        StartCoroutine(StartDeath());
+        
+    }
+
+    private IEnumerator StartDeath()
+    {
+        yield return new WaitForSeconds(0.5f);
         ResetAllanim();
         //DOTween.KillAll();
 
@@ -336,9 +347,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetTrigger("death");
         StartCoroutine(LoseScreenAc());
     }
-
-   
-
 
     private IEnumerator LoseScreenAc()
     {
