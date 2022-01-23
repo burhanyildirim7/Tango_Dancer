@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4788496, g: 0.80017924, b: 0.8994595, a: 1}
+  m_IndirectSpecularColor: {r: 0.47885835, g: 0.8001623, b: 0.9005865, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -969,6 +969,7 @@ MonoBehaviour:
   _iyiToplanabilirDeger: 0
   "_k\xF6t\xFCToplanabilirDeger": 0
   _karakterPaketi: {fileID: 2018247884}
+  _healtBar: {fileID: 3646537711365985274}
   _finishLevel: {fileID: 4193258202526137091, guid: 9e41c1ad9e846804997192b8a9f02590, type: 3}
   playerAnimator: {fileID: 1833857242}
   pointLeft: {fileID: 1459926654}
@@ -4047,7 +4048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.17246428}
   m_AnchorMax: {x: 0.5, y: 0.17246428}
-  m_AnchoredPosition: {x: 0, y: -14.999756}
+  m_AnchoredPosition: {x: 0, y: -14.999771}
   m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2037673478034290643

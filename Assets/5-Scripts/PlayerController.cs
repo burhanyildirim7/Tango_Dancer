@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int _kötüToplanabilirDeger;
 
-    [SerializeField] private GameObject _karakterPaketi;
+    [SerializeField] private GameObject _karakterPaketi,_healtBar;
 
     [SerializeField] private FinishLevel _finishLevel;
 
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         emojiPuke.SetActive(false);
         emojiDrool.SetActive(false);
 
-        GetComponentInChildren<Health>().LoseGame += LoseScreenAc;
+        GetComponentInChildren<Health>().LoseGame += DeathPlayer;
 
         _elmasSayisi = PlayerPrefs.GetInt("ElmasSayisi");
 
@@ -66,33 +66,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        //if (other.tag == "Elmas")
-        //{
-        //    _elmasSayisi += 1;
-        //    _toplananElmasSayisi += 1;
-        //    PlayerPrefs.SetInt("ElmasSayisi", _elmasSayisi);
-        //    Destroy(other.gameObject);
-        //}
-
-        //if (other.gameObject.tag == "GoodManLeft")
-        //{
-
-
-        //    StartGoodmanActionLeft(other.gameObject);
-        //}
-
-        //if (other.gameObject.tag == "GoodManLeft")
-        //{
-
-        //    GoodManDance(pointLeft, other.gameObject);
-
-        //}
-        //else if(other.gameObject.tag == "GoodManRight")
-        //{
-
-        //    GoodManDance(pointRight, other.gameObject);
-
-        //}
+      
         if (other.gameObject.tag == "BadManLeft")
         {
             BadManMove(pointLeft);
@@ -139,9 +113,9 @@ public class PlayerController : MonoBehaviour
         {
             GameController._oyunAktif = false;
             playerAnimator.ResetTrigger("walk");
-            playerAnimator.SetTrigger("idle");
-
-
+            //playerAnimator.SetTrigger("idle");
+            playerAnimator.SetTrigger("pose");
+            _healtBar.GetComponent<Canvas>().enabled = false;
 
             int gidilecekFinishX = (GetComponentInChildren<Health>().currentHealth / 10);
             print(gidilecekFinishX);
@@ -157,6 +131,7 @@ public class PlayerController : MonoBehaviour
             transform.DOMoveZ(_finishLevel._xFinish[gidilecekFinishX].transform.position.z, gidilecekFinishX);
             if (gidilecekFinishX == 0)
                 gidilecekFinishX = 1;
+
             transform.DORotate(new Vector3(0, 360 * gidilecekFinishX, 0), gidilecekFinishX, RotateMode.FastBeyond360).OnComplete(PlayerWinAnim);
 
             confetti.GetComponent<ParticleSystem>().Play();
@@ -207,7 +182,7 @@ public class PlayerController : MonoBehaviour
     {
 
         transform.DORotate(new Vector3(0, 180, 0), 0.5f);
-        playerAnimator.ResetTrigger("idle");
+        playerAnimator.ResetTrigger("pose");
         playerAnimator.SetTrigger("windance");
         confetti.GetComponent<ParticleSystem>().Stop();
         StartCoroutine(WinScreenAc());
@@ -223,7 +198,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         playerAnimator.ResetTrigger("stumble");
-        playerAnimator.SetTrigger("walk");
+        if(GetComponentInChildren<Health>().currentHealth>0)
+            playerAnimator.SetTrigger("walk");
 
     }
     //OBSTACLE//
@@ -269,6 +245,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void ResetAllanim()
+    {
+        playerAnimator.ResetTrigger("walk");
+        playerAnimator.ResetTrigger("idle");
+        playerAnimator.ResetTrigger("defeat");
+        playerAnimator.ResetTrigger("stumble");
+        playerAnimator.ResetTrigger("victory");
+        playerAnimator.ResetTrigger("pose");
+        playerAnimator.ResetTrigger("death");
+    }
+
     public void PlayerWalkAnim()
     {
         playerAnimator.SetTrigger("walk");
@@ -283,10 +270,14 @@ public class PlayerController : MonoBehaviour
 
     public void BadManMove(GameObject point)
     {
-        playerAnimator.ResetTrigger("walk");
-        //GameController._oyunAktif = false;
-        playerAnimator.SetTrigger("defeat");
-        transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
+        if (GetComponentInChildren<Health>().currentHealth > 0)
+        {
+            playerAnimator.ResetTrigger("walk");
+            //GameController._oyunAktif = false;
+            playerAnimator.SetTrigger("defeat");
+            transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
+        }
+            
 
 
     }
@@ -322,17 +313,36 @@ public class PlayerController : MonoBehaviour
 
     }
     //LOSE
-    private void LoseScreenAc()
+
+    private void DeathPlayer()
     {
-        gameObject.GetComponentInChildren<Animator>().Rebind();
+        //StartCoroutine(StartDeath());
+        ResetAllanim();
+        DOTween.KillAll();
+        
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        GameController._oyunAktif = false;
+        //gameObject.GetComponentInChildren<Animator>().Rebind();
+
+
+        playerAnimator.SetTrigger("death");
+        StartCoroutine(LoseScreenAc());
+    }
+
+   
+
+
+    private IEnumerator LoseScreenAc()
+    {
+        yield return new WaitForSeconds(4f);
 
         _uiController.LevelSonuElmasSayisi(_levelSonuElmasSayisi);
 
         //playerAnimator.ResetTrigger("walk");
         //playerAnimator.ResetTrigger("defeat");
-        playerAnimator.ResetTrigger("stumble");
+        //playerAnimator.ResetTrigger("stumble");
         //playerAnimator.ResetTrigger("dance");
-        playerAnimator.SetTrigger("idle");
+        //playerAnimator.SetTrigger("idle");
 
         _uiController.LoseScreenPanelOpen();
 
@@ -353,7 +363,10 @@ public class PlayerController : MonoBehaviour
     //LOSE
     public void LevelStart()
     {
-
+        ResetAllanim();
+        playerAnimator.SetTrigger("idle");
+        transform.GetComponent<CapsuleCollider>().enabled = true;
+        _healtBar.GetComponent<Canvas>().enabled = true;
         _levelSonuElmasSayisi = 0;
 
         _elmasSayisi = PlayerPrefs.GetInt("ElmasSayisi");
@@ -367,7 +380,8 @@ public class PlayerController : MonoBehaviour
 
     public void TabToStart()
     {
-        playerAnimator.ResetTrigger("idle");
+
+        //playerAnimator.ResetTrigger("idle");
         playerAnimator.SetTrigger("walk");
 
     }
