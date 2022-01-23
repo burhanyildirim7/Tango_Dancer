@@ -337,7 +337,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         ResetAllanim();
-        //DOTween.KillAll();
+        DOTween.KillAll();
 
         //gameObject.GetComponent<CapsuleCollider>().enabled = false;
         GameController._oyunAktif = false;
@@ -397,7 +397,7 @@ public class PlayerController : MonoBehaviour
     public void TabToStart()
     {
 
-        //playerAnimator.ResetTrigger("idle");
+        playerAnimator.ResetTrigger("idle");
         playerAnimator.SetTrigger("walk");
 
     }
