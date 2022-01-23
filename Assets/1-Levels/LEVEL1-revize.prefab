@@ -8063,6 +8063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HareketliSilindir (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6859932732196540835, guid: cc8ec99b52e14c54f8550cd20cc71680, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc8ec99b52e14c54f8550cd20cc71680, type: 3}
 --- !u!4 &3565715740782539124 stripped
