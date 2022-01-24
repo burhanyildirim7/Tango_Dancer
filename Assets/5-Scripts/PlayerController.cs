@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int _kötüToplanabilirDeger;
 
-    [SerializeField] private GameObject _karakterPaketi,_healtBar;
+    [SerializeField] private GameObject _karakterPaketi, _healtBar;
 
     [SerializeField] private FinishLevel _finishLevel;
 
@@ -66,28 +66,30 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-      
+
         if (other.gameObject.tag == "BadManLeft")
         {
             if (GetComponentInChildren<Health>().currentHealth >= 0)
                 BadManMove(pointLeft);
-            
+
         }
         else if (other.gameObject.tag == "BadManRight")
         {
             if (GetComponentInChildren<Health>().currentHealth >= 0)
                 BadManMove(pointRight);
-            
+
         }
 
         if (other.gameObject.tag == "GoodManPoint")
         {
+            MoreMountains.NiceVibrations.MMVibrationManager.Haptic(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
             GoodManPoint();
 
         }
 
         if (other.gameObject.tag == "BadManPoint")
         {
+            MoreMountains.NiceVibrations.MMVibrationManager.Haptic(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
             BadManPoint();
 
         }
@@ -96,17 +98,17 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "Obstacle")
         {
+            MoreMountains.NiceVibrations.MMVibrationManager.Haptic(MoreMountains.NiceVibrations.HapticTypes.MediumImpact);
 
-            
             if (GetComponentInChildren<Health>().currentHealth >= 0)
             {
                 GetComponentInChildren<Health>().ModifyHealth(-10);
                 playerAnimator.SetTrigger("stumble");
 
-               StartCoroutine( PlayerStumbleWalk());
-                
+                StartCoroutine(PlayerStumbleWalk());
+
             }
-            
+
 
         }
 
@@ -204,14 +206,14 @@ public class PlayerController : MonoBehaviour
     private IEnumerator PlayerStumbleWalk()
     {
         yield return new WaitForSeconds(0.5f);
-            
-            if (GetComponentInChildren<Health>().currentHealth >= 0)
+
+        if (GetComponentInChildren<Health>().currentHealth >= 0)
         {
             playerAnimator.ResetTrigger("stumble");
             playerAnimator.SetTrigger("walk");
         }
-      
-            
+
+
 
     }
     //OBSTACLE//
@@ -282,28 +284,28 @@ public class PlayerController : MonoBehaviour
 
     public void BadManMove(GameObject point)
     {
-        
-            playerAnimator.ResetTrigger("walk");
-            //GameController._oyunAktif = false;
-            playerAnimator.SetTrigger("defeat");
-            transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
-        
-            
+
+        playerAnimator.ResetTrigger("walk");
+        //GameController._oyunAktif = false;
+        playerAnimator.SetTrigger("defeat");
+        transform.DOMove(point.transform.position, 0.2f).OnComplete(PlayerWalkFast);
+
+
 
 
     }
 
     public void PlayerWalkFast()
     {
-        
-        
-            //GameController._oyunAktif = true;
-            playerAnimator.ResetTrigger("defeat");
-            playerAnimator.SetTrigger("walk");
-            _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedFast;
-            playerAnimator.SetFloat("run", 2);
-            StartCoroutine(PlayerWalkNormal());
-        
+
+
+        //GameController._oyunAktif = true;
+        playerAnimator.ResetTrigger("defeat");
+        playerAnimator.SetTrigger("walk");
+        _karakterPaketi.GetComponent<KarakterPaketiMovement>()._speed = _speedFast;
+        playerAnimator.SetFloat("run", 2);
+        StartCoroutine(PlayerWalkNormal());
+
     }
 
     public IEnumerator PlayerWalkNormal()
@@ -330,7 +332,7 @@ public class PlayerController : MonoBehaviour
     private void DeathPlayer()
     {
         StartCoroutine(StartDeath());
-        
+
     }
 
     private IEnumerator StartDeath()
